@@ -2,9 +2,11 @@ const startGameButton = document.getElementById("startGameButton");
 const resetGameButton = document.getElementById("resetGameButton");
 const attemptsLeftDisplay = document.getElementById("attemptsLeft");
 const playerModeSelect = document.getElementById("playerMode");
+const playHangmanButton = document.getElementById("playHangmanButton");
+const modal = document.getElementById("myModal");
+
 
 // Get modal elements
-const modal = document.getElementById("modal");
 const modalContent = document.getElementById("modal-content");
 const closeModalButton = document.getElementById("closeModalButton");
 
@@ -17,6 +19,14 @@ let gameStarted = false;
 let playerName = "";
 let playerNames = [];
 let currentPlayerIndex = 0;
+
+//Buttons for the game
+closeModalButton.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+playHangmanButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
 
 function getRandomWord() {
   return wordList[Math.floor(Math.random() * wordList.length)];
