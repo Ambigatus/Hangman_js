@@ -3,6 +3,11 @@ const resetGameButton = document.getElementById("resetGameButton");
 const attemptsLeftDisplay = document.getElementById("attemptsLeft");
 const playerModeSelect = document.getElementById("playerMode");
 
+// Get modal elements
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modal-content");
+const closeModalButton = document.getElementById("closeModalButton");
+
 let wordList = ["apple", "banana", "orange", "strawberry", "watermelon"];
 let currentWord;
 let guessedLetters = [];
@@ -76,8 +81,6 @@ function checkGameStatus(letter) {
   }
 }
 
-
-
 function resetGame() {
   gameStarted = false;
   resetGameButton.style.display = "none";
@@ -141,7 +144,6 @@ document.addEventListener("keypress", (event) => {
   }
 });
 
-
 playerModeSelect.addEventListener("change", () => {
   togglePlayerInputs();
 });
@@ -163,10 +165,26 @@ function endGame(win) {
     message = `Sorry, ${currentPlayer}, you lost. The word was: ${currentWord}`;
   }
   alert(message);
+  const modal = document.getElementById("modal");
+  if (modal) {
+    modal.style.display = "none";
+  }
   resetGame();
 }
+
 
 resetGameButton.addEventListener("click", () => {
     resetGame();
 });
 
+// Close modal when close button is clicked
+closeModalButton.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Close modal when clicking outside the modal content
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
