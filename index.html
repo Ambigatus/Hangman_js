@@ -1,78 +1,34 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
-
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hangman Game</title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="Hangman Game">
-  <meta property="og:title" content="Hangman Game">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/word-list.js" defer></script>
+    <script src="js/hangman.js" defer></script>
 </head>
-
 <body>
-  <button id="playHangmanButton">Play Hangman</button>
-
-  <!-- Modal -->
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <div class="container">
-          <h1>Hangman Game</h1>
-          <div>
-            <label for="playerMode">Select Player Mode:</label>
-            <select id="playerMode" onchange="togglePlayerInputs()">
-              <option value="single">Single Player</option>
-              <option value="multi">Multiplayer</option>
-            </select>
-          </div>
-          <div id="inputContainer">
-            <div id="playerNameInput" style="display: block;">
-              <label for="playerName">Your Name:</label>
-              <input type="text" id="playerName">
-              <div>
-                <p><span id="soloPlayerNameDisplay"></span></p>
-                <p>Attempts left: <span id="soloAttemptsLeft">6</span></p>
-              </div>
-            </div>
-            <div id="player1Input" style="display: none;">
-              <label for="player1Name">Player 1 Name:</label>
-              <input type="text" id="player1Name">
-            </div>
-            <div id="player2Input" style="display: none;">
-              <label for="player2Name">Player 2 Name:</label>
-              <input type="text" id="player2Name">
-            </div>
-          </div>
-
-          <div id="player1" style="display: none;">
-            <p id="player1NameDisplay"></p>
-            <p>Attempts left: <span id="player1AttemptsLeft">6</span></p>
-          </div>
-
-          <div id="player2" style="display: none;">
-            <p id="player2NameDisplay"></p>
-            <p>Attempts left: <span id="player2AttemptsLeft">6</span></p>
-          </div>
-
-          <button id="startGameButton">Start Game</button>
-          <button id="closeModalButton">Close</button>
-          <button id="resetGameButton" style="display: none;">Reset Game</button>
-          <div id="wordDisplay"></div>
-          <div id="playerTurn"></div>
+    <div class="game-modal">
+        <div class="content">
+            <img src="#" alt="gif">
+            <h4>Game Over!</h4>
+            <p>The correct word was: <b>rainbow</b></p>
+            <button class="play-again">Play Again</button>
         </div>
-      </div>
     </div>
-
-
-  <script src="js/hangman.js"></script>
+    <div class="container">
+        <div class="hangman-box">
+            <img src="#" draggable="false" alt="hangman-img">
+            <h1>Hangman Game</h1>
+        </div>
+        <div class="game-box">
+            <ul class="word-display"></ul>
+            <h4 class="hint-text">Hint: <b></b></h4>
+            <h4 class="guesses-text">Incorrect guesses: <b></b></h4>
+            <div class="keyboard"></div>
+        </div>
+    </div>
 </body>
-
 </html>
