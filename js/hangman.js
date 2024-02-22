@@ -12,7 +12,6 @@ const player2NameDisplay = document.getElementById("player2NameDisplay");
 const soloPlayerNameDisplay = document.getElementById("soloPlayerNameDisplay");
 const soloAttemptsLeftDisplay = document.getElementById("soloAttemptsLeft");
 
-
 // Get modal elements
 const modalContent = document.getElementById("modal-content");
 const closeModalButton = document.getElementById("closeModalButton");
@@ -82,6 +81,7 @@ function startNewGame() {
     displayWord();
     updatePlayerTurnDisplay();
   }
+  document.querySelector("label[for='playerName']").style.display = "none";
 }
 
 function switchPlayer(letter) {
@@ -125,6 +125,7 @@ function resetGame() {
   player1AttemptsLeftDisplay.textContent = '';
   player2AttemptsLeftDisplay.textContent = '';
   soloAttemptsLeftDisplay.textContent = '';
+  document.querySelector("label[for='playerName']").style.display = "block";
 }
 
 function updateAttemptsLeftDisplay() {

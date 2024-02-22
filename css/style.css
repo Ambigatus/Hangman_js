@@ -281,7 +281,8 @@ textarea {
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
+  height: 40%;
 }
 
 /* Close button */
@@ -322,4 +323,22 @@ textarea {
 
 #playerName {
   margin: 0 auto;
+}
+
+.container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+#soloPlayerNameDisplay {
+  font-size: 20px;
+  color: blue;
+}
+
+#soloAttemptsLeft {
+  font-size: 18px;
+  color: red;
 }
