@@ -185,3 +185,7 @@ body {
         padding: 10px 18px;
     }
 }
+
+.game-window {
+    display: none;
+}
