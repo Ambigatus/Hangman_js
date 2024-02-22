@@ -299,5 +299,27 @@ textarea {
   cursor: pointer;
 }
 
+#player1 {
+  position: absolute;
+  left: 30%;
+}
 
+#player2 {
+  position: absolute;
+  right: 30%;
+}
 
+#soloAttemptsLeft {
+  display: none;
+}
+
+#parentContainerId {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This will make the container take the full height of the viewport */
+}
+
+#playerName {
+  margin: 0 auto;
+}

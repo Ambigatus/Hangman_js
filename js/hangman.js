@@ -1,9 +1,16 @@
 const startGameButton = document.getElementById("startGameButton");
 const resetGameButton = document.getElementById("resetGameButton");
-const attemptsLeftDisplay = document.getElementById("attemptsLeft");
 const playerModeSelect = document.getElementById("playerMode");
 const playHangmanButton = document.getElementById("playHangmanButton");
 const modal = document.getElementById("myModal");
+const player1Div = document.getElementById("player1");
+const player1AttemptsLeftDisplay = document.getElementById("player1AttemptsLeft");
+const player2Div = document.getElementById("player2");
+const player2AttemptsLeftDisplay = document.getElementById("player2AttemptsLeft");
+const player1NameDisplay = document.getElementById("player1NameDisplay");
+const player2NameDisplay = document.getElementById("player2NameDisplay");
+const soloPlayerNameDisplay = document.getElementById("soloPlayerNameDisplay");
+const soloAttemptsLeftDisplay = document.getElementById("soloAttemptsLeft");
 
 
 // Get modal elements
@@ -35,7 +42,14 @@ function getRandomWord() {
 function startNewGame() {
   let selectedMode = playerModeSelect.value;
   if (selectedMode === "single") {
-    playerName = document.getElementById("playerName").value.trim();
+    document.getElementById("soloAttemptsLeft").style.display = "inline";
+    playerName = document.getElementById("playerName").value;
+    if (!playerName.trim()) {
+      alert("Your Name field cannot be empty.");
+      return;
+    }
+    soloPlayerNameDisplay.textContent = `Player: ${playerName}`;
+    soloAttemptsLeftDisplay.textContent = "6";
     currentWord = getRandomWord();
     guessedLetters = [];
     incorrectAttempts[playerName] = 0;
@@ -44,7 +58,16 @@ function startNewGame() {
     updateAttemptsLeftDisplay();
     displayWord();
     updatePlayerTurnDisplay();
+    document.getElementById("playerName").style.display = "none";
   } else if (selectedMode === "multi") {
+    let player1Check = document.getElementById("player1Name").value.trim();
+    let player2Check = document.getElementById("player2Name").value.trim();
+    if (!player1Check|| !player2Check) {
+      alert("Player 1 and Player 2 fields cannot be empty.");
+      return;
+    }
+    player1Div.style.display = "block";
+    player2Div.style.display = "block";
     playerNames.push(document.getElementById("player1Name").value.trim());
     playerNames.push(document.getElementById("player2Name").value.trim());
     currentPlayerIndex = 0;
@@ -95,12 +118,22 @@ function resetGame() {
   gameStarted = false;
   resetGameButton.style.display = "none";
   document.getElementById("wordDisplay").textContent = "";
-  playerNames = [];
+  document.getElementById("playerName").value = '';
+  player1NameDisplay.textContent = '';
+  player2NameDisplay.textContent = '';
+  soloPlayerNameDisplay.textContent = '';
+  player1AttemptsLeftDisplay.textContent = '';
+  player2AttemptsLeftDisplay.textContent = '';
+  soloAttemptsLeftDisplay.textContent = '';
 }
 
 function updateAttemptsLeftDisplay() {
-  const currentPlayer = getCurrentPlayer();
-  attemptsLeftDisplay.textContent = (maxAttempts[currentPlayer] - incorrectAttempts[currentPlayer]).toString();
+  if (playerModeSelect.value === "single") {
+    soloAttemptsLeftDisplay.textContent = (maxAttempts[playerName] - incorrectAttempts[playerName]).toString();
+  } else {
+    player1AttemptsLeftDisplay.textContent = (maxAttempts[playerNames[0]] - incorrectAttempts[playerNames[0]]).toString();
+    player2AttemptsLeftDisplay.textContent = (maxAttempts[playerNames[1]] - incorrectAttempts[playerNames[1]]).toString();
+  }
 }
 
 function displayWord() {
@@ -118,8 +151,8 @@ function displayWord() {
 }
 
 function updatePlayerTurnDisplay() {
-  const currentPlayer = getCurrentPlayer();
-  document.getElementById("playerTurn").textContent = `Current player: ${currentPlayer}`;
+  player1NameDisplay.textContent = `Player 1: ${playerNames[0]}`;
+  player2NameDisplay.textContent = `Player 2: ${playerNames[1]}`;
 }
 
 function togglePlayerInputs() {
@@ -146,10 +179,9 @@ document.addEventListener("keypress", (event) => {
       guessedLetters.push(letter);
       if (!currentWord.includes(letter)) {
         incorrectAttempts[currentPlayer]++;
-        updateAttemptsLeftDisplay();
       }
       displayWord();
-      checkGameStatus(letter); // Pass the guessed letter as an argument
+      checkGameStatus(letter); // Call checkGameStatus for every guessed letter
     }
   }
 });
@@ -179,6 +211,13 @@ function endGame(win) {
   if (modal) {
     modal.style.display = "none";
   }
+  player1NameDisplay.textContent = '';
+  player2NameDisplay.textContent = '';
+  soloPlayerNameDisplay.textContent = '';
+  player1AttemptsLeftDisplay.textContent = '';
+  player2AttemptsLeftDisplay.textContent = '';
+  soloAttemptsLeftDisplay.textContent = '';
+  document.getElementById("playerName").style.display = "block";
   resetGame();
 }
 
@@ -190,6 +229,14 @@ resetGameButton.addEventListener("click", () => {
 // Close modal when close button is clicked
 closeModalButton.addEventListener("click", () => {
   modal.style.display = "none";
+  document.getElementById("playerName").value = '';
+  player1NameDisplay.textContent = '';
+  player2NameDisplay.textContent = '';
+  soloPlayerNameDisplay.textContent = '';
+  player1AttemptsLeftDisplay.textContent = '';
+  player2AttemptsLeftDisplay.textContent = '';
+  soloAttemptsLeftDisplay.textContent = '';
+  resetGame();
 });
 
 // Close modal when clicking outside the modal content
@@ -198,3 +245,9 @@ window.addEventListener("click", (event) => {
     modal.style.display = "none";
   }
 });
+
+function hideAttemptsLeftInitially() {
+  document.getElementById("soloAttemptsLeft").style.display = "none";
+}
+
+hideAttemptsLeftInitially();
