@@ -15,7 +15,7 @@ body {
     background: #5E63BA;
 }
 .container {
-    display: flex;
+    display: none;
     width: 850px;
     gap: 70px;
     padding: 60px 40px;
@@ -186,6 +186,13 @@ body {
     }
 }
 
-.game-window {
-    display: none;
+#player-name {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
 }
+/* End of style.css */

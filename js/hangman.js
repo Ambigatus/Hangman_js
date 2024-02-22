@@ -5,6 +5,7 @@ const hangmanImage = document.querySelector(".hangman-box img");
 const gameModal = document.querySelector(".game-modal");
 const playAgainBtn = gameModal.querySelector("button");
 
+
 // Initializing game variables
 let currentWord, correctLetters, wrongGuessCount;
 const maxGuesses = 6;
@@ -12,23 +13,24 @@ let players = [{ name: 'Player 1', score: 0 }, { name: 'Player 2', score: 0 }];
 let currentPlayerIndex = 0;
 let isMultiplayer = false;
 
-const handleGameModeSelection = () => {
-    const soloGameButton = document.getElementById('solo-game-button');
-    const multiplayerGameButton = document.getElementById('multiplayer-game-button');
-    const gameWindow = document.querySelector('.game-window');
 
-    soloGameButton.addEventListener('click', () => {
+const soloGameButton = document.getElementById('solo-game-button');
+const multiplayerGameButton = document.getElementById('multiplayer-game-button');
+const gameWindow = document.querySelector('.container');
+
+
+soloGameButton.addEventListener('click', () => {
         isMultiplayer = false;
-        gameWindow.style.display = 'block';
+        gameWindow.style.display = 'flex';
         initGame();
-    });
+});
 
-    multiplayerGameButton.addEventListener('click', () => {
+multiplayerGameButton.addEventListener('click', () => {
         isMultiplayer = true;
-        gameWindow.style.display = 'block';
+        gameWindow.style.display = 'flex';
         initGame();
-    });
-};
+});
+
 
 const resetGame = () => {
     correctLetters = [];
@@ -58,8 +60,10 @@ const gameOver = (isVictory) => {
 }
 
 const initGame = (button, clickedLetter) => {
-    const gameModeSelection = document.querySelector('.game-mode-selection');
-    gameModeSelection.style.display = 'none';
+    const playerNameDiv = document.getElementById('player-name');
+    playerNameDiv.innerText = players[currentPlayerIndex].name;
+    soloGameButton.style.display = 'none';
+    multiplayerGameButton.style.display = 'none';
     if(currentWord.includes(clickedLetter)) {
         // Showing all correct letters on the word display
         [...currentWord].forEach((letter, index) => {
@@ -80,7 +84,6 @@ const initGame = (button, clickedLetter) => {
     // Calling gameOver function if any of these condition meets
     if(wrongGuessCount === maxGuesses) return gameOver(false);
     if(correctLetters.length === currentWord.length) return gameOver(true);
-    window.onload = handleGameModeSelection;
 }
 
 // Creating keyboard buttons and adding event listeners

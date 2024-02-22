@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game JavaScript | CodingNepal</title>
+    <title>Hangman Game</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/word-list.js" defer></script>
     <script src="js/hangman.js" defer></script>
@@ -22,7 +21,8 @@
             <button class="play-again">Play Again</button>
         </div>
     </div>
-    <div class="container">
+    <div id="game" class="container">
+        <div id="player-name"></div>
         <div class="hangman-box">
             <img src="#" draggable="false" alt="hangman-img">
             <h1>Hangman Game</h1>
